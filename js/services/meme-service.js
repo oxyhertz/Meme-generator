@@ -67,3 +67,12 @@ function changeFontSize(operator) {
   var fontSize = gMeme.lines[gMeme.selectedLineIdx].size;
   gMeme.lines[gMeme.selectedLineIdx].size = fontSize + 3 * operator;
 }
+
+function switchLine() {
+  gMeme.selectedLineIdx++;
+  if (gMeme.selectedLineIdx > gMeme.lines.length - 1) {
+    gMeme.selectedLineIdx = 0;
+  }
+
+  console.log(gMeme.selectedLineIdx);
+}

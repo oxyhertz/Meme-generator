@@ -40,7 +40,9 @@ function onFillcolor() {
   renderMeme();
 }
 
-function onSwitchLine() {}
+function onSwitchLine() {
+  switchLine();
+}
 
 function onChangeFontSize(operator) {
   changeFontSize(operator);
