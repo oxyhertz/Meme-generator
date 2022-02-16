@@ -7,9 +7,18 @@ var gMeme = {
     {
       txt: 'I sometimes eat Falafel',
       size: 30,
-      align: 'left',
+      align: 'center',
       color: 'red',
       font: 'Arial',
+      posY: 40,
+    },
+    {
+      txt: 'I sometimes eat Falafel',
+      size: 30,
+      align: 'center',
+      color: 'red',
+      font: 'Arial',
+      posY: 340,
     },
   ],
 };
@@ -22,9 +31,10 @@ function setLineTxt(txt) {
   gMeme.lines.push({
     txt,
     size: 30,
-    align: 'left',
+    align: 'center',
     color: 'red',
     font: 'Arial',
+    posY: 200,
   });
 }
 
@@ -51,4 +61,9 @@ function setImg(id) {
 
 function fillColor(color) {
   gMeme.lines[gMeme.selectedLineIdx].color = color;
+}
+
+function changeFontSize(operator) {
+  var fontSize = gMeme.lines[gMeme.selectedLineIdx].size;
+  gMeme.lines[gMeme.selectedLineIdx].size = fontSize + 3 * operator;
 }

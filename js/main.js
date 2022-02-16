@@ -36,14 +36,19 @@ function onAddText() {
 
 function onFillcolor() {
   var color = document.querySelector('.fill-color').value;
-  console.log(color);
   fillColor(color);
+  renderMeme();
+}
+
+function onSwitchLine() {}
+
+function onChangeFontSize(operator) {
+  changeFontSize(operator);
   renderMeme();
 }
 
 function drawImg(meme) {
   var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
-  console.log(elImg);
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
@@ -61,6 +66,6 @@ function drawText(line) {
   gCtx.textAlign = line.align;
   gCtx.strokeStyle = 'black';
   line.width = gCtx.measureText(txt).width;
-  gCtx.fillText(txt, 50, 30);
-  gCtx.strokeText(txt, 50, 30);
+  gCtx.fillText(txt, gElCanvas.width / 2, line.posY);
+  gCtx.strokeText(txt, gElCanvas.width / 2, line.posY);
 }
