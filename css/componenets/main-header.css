@@ -1,3 +1,17 @@
+header {
+  background-color: var(--clr1);
+}
+
 .main-header {
-  height: 130px;
+  height: 66px;
+}
+
+.main-header .main-nav a {
+  color: var(--clr2);
+  font-size: 1.1875rem;
+  line-height: 1.425;
+}
+
+.main-header .main-nav li:first-child {
+  margin-right: 20px;
 }
