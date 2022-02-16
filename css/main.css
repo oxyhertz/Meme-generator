@@ -10,11 +10,5 @@
 @import 'basic/buttons.css';
 @import 'setup/mq.css';
 
-.canvas-container {
-  width: 400px;
-  height: 400px;
-}
-
-.hidden {
-  display: none;
-}
+/* COMPONENET */
+@import 'componenets/canvas.css';
