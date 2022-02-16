@@ -8,36 +8,54 @@
     <title>Meme Generator</title>
   </head>
   <body onload="init()">
-    <header>HEADER</header>
-    <nav>NAV</nav>
+    <header>
+      <div class="main-header flex space-between align-center main-layout">
+        <img src="logo/LOGO.png" alt="" width="150px" />
+        <nav class="main-nav-container">
+          <ul class="main-nav clean-list flex">
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <nav>
+      <div class="page-nav main-layout">Nav</div>
+    </nav>
     <main>
-      <section class="gallery"></section>
-      <section class="editor">
-        <div class="canvas-container">
-          <canvas id="canvas" height="300" width="300"></canvas>
-        </div>
-        <div class="canvas-operation">
-          <input
-            class="input-txt"
-            type="text"
-            placeholder="Enter text"
-            name="txt"
-          />
-          <button onclick="onAddText()">Add</button>
-          <input
-            class="fill-color"
-            type="color"
-            name="fill-color"
-            onchange="onFillcolor()"
-          />
-          <button class="incFont" onclick="onChangeFontSize(1)">+</button>
-          <button class="decFont" onclick="onChangeFontSize(-1)">-</button>
-          <button class="switch-line" onclick="onSwitchLine()">Switch</button>
-        </div>
+      <section class="main-content main-layout">
+        <section class="gallery"></section>
+        <section class="editor">
+          <div class="canvas-container">
+            <canvas id="canvas" height="300" width="300"></canvas>
+          </div>
+          <div class="canvas-operation">
+            <input
+              class="input-txt"
+              type="text"
+              placeholder="Enter text"
+              name="txt"
+            />
+            <button onclick="onAddText()">Add</button>
+            <input
+              class="fill-color"
+              type="color"
+              name="fill-color"
+              onchange="onFillcolor()"
+            />
+            <button class="incFont" onclick="onChangeFontSize(1)">+</button>
+            <button class="decFont" onclick="onChangeFontSize(-1)">-</button>
+            <button class="switch-line" onclick="onSwitchLine()">Switch</button>
+          </div>
+        </section>
       </section>
     </main>
-    <article>ABOUT ME</article>
-    <footer>FOOTER</footer>
+    <article>
+      <div class="about-me-container main-layout">ABOUT ME</div>
+    </article>
+    <footer>
+      <div class="footer-container main-layout">Footer</div>
+    </footer>
     <script src="js/services/meme-service.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/main.js"></script>
