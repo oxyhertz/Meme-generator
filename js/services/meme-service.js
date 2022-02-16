@@ -7,7 +7,7 @@ var gMeme = {
     {
       txt: 'I sometimes eat Falafel',
       size: 30,
-      align: 'right',
+      align: 'center',
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
@@ -19,7 +19,7 @@ var gMeme = {
     {
       txt: 'I sometimes eat Falafel',
       size: 30,
-      align: 'right',
+      align: 'center',
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',

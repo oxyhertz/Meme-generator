@@ -4,7 +4,6 @@ var gCtx;
 var gElCanvas;
 var gStartPos;
 var gIsUpdateText = false;
-
 function init() {
   createImgs();
   renderGallery(getImgs());
@@ -71,6 +70,7 @@ function onAddText() {
 
   setLineTxt(txt);
   renderMeme();
+
   document.querySelector('.input-txt').value = '';
 }
 
@@ -78,12 +78,14 @@ function onFillcolor() {
   var color = document.querySelector('.fill-color').value;
   fillColor(color);
   renderMeme();
+  focused();
 }
 
 function onStrokeColor() {
   var color = document.querySelector('.stroke-color').value;
   strokeColor(color);
   renderMeme();
+  focused();
 }
 function onSwitchLine() {
   switchLine();
@@ -96,20 +98,24 @@ function onSwitchLine() {
 function onRemoveLine() {
   removeLine();
   renderMeme();
+  focused();
 }
 
 function onSelectFont() {
   let font = document.querySelector('.fonts-select').value;
   selectFont(font);
   renderMeme();
+  focused();
 }
 function onChangeAligment(location) {
   changeAligment(location);
   renderMeme();
+  focused();
 }
 function onChangeFontSize(operator) {
   changeFontSize(operator);
   renderMeme();
+  focused();
 }
 
 function drawImg(meme) {
@@ -178,21 +184,16 @@ function onDown(ev) {
       pos.y <= line.posY + line.size / 2 &&
       pos.y >= line.posY - line.size
     );
-    // return (
-    //   pos.x >= line.posX - line.width / 2 &&
-    //   pos.x <= line.posX + line.width / 2 &&
-    //   pos.y < line.posY &&
-    //   pos.y > line.posY - line.size
-    // );
   });
   updateInputVal('');
   gIsUpdateText = false;
+  renderMeme();
   if (clickedLineIdx < 0) return;
   meme.selectedLineIdx = clickedLineIdx;
   gIsUpdateText = true;
   updateInputVal(getCurrLine().txt);
-  //   setLineFocus(true);
-  //   focused();
+  setLineFocus(true);
+  focused();
   setLineDrag(true);
   gStartPos = pos;
   document.body.style.cursor = 'grabbing';
@@ -210,6 +211,7 @@ function onMove(ev) {
     moveCurrLine(dx, dy);
     gStartPos = pos;
     renderMeme();
+    focused();
   }
 }
 
