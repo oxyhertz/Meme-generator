@@ -11,25 +11,32 @@
     <header></header>
     <main>
       <section class="gallery">
-        <img src="images/meme-imgs/1.jpg" alt="" hidden />
+        <!-- <img src="images/meme-imgs/1.jpg" alt="" hidden /> -->
       </section>
       <section class="editor">
         <div class="canvas-container">
           <canvas id="canvas" height="300" width="300"></canvas>
         </div>
-        <div class="canvas-actions">
+        <div class="canvas-operation">
           <input
             class="input-txt"
             type="text"
             placeholder="Enter text"
             name="txt"
           />
-          <button onclick="onAddText()">+</button>
+          <button onclick="onAddText()">Add</button>
+          <input
+            class="fill-color"
+            type="color"
+            name="fill-color"
+            onclick="onFillcolor()"
+          />
         </div>
       </section>
     </main>
     <footer></footer>
     <script src="js/services/meme-service.js"></script>
+    <script src="js/galleryController.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

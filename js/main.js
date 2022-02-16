@@ -4,6 +4,8 @@ var gCtx;
 var gElCanvas;
 
 function init() {
+  createImgs();
+  renderGallery(getImgs());
   createCanvas();
   resizeCanvas();
   renderMeme();
@@ -22,19 +24,27 @@ function resizeCanvas() {
 
 function renderMeme() {
   var meme = getMeme();
-  drawImg2(meme);
+  drawImg(meme);
   drawLines(meme);
 }
 
 function onAddText() {
   const txt = document.querySelector('.input-txt').value;
+  setLineTxt(txt);
+  renderMeme();
 }
 
-function drawImg2(meme) {
-  var img = new Image();
-  img.src = `./images/meme-imgs/${meme.selectedImgId}.jpg`;
+function onFillcolor() {
+  var color = document.querySelector('.fill-color').value;
+  console.log(color);
+  fillColor(color);
+  renderMeme();
+}
 
-  gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+function drawImg(meme) {
+  var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
+  console.log(elImg);
+  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
 function drawLines(meme) {
@@ -54,7 +64,3 @@ function drawText(line) {
   gCtx.fillText(txt, 50, 30);
   gCtx.strokeText(txt, 50, 30);
 }
-// function drawImg() {
-//   var elImg = document.querySelector('img');
-//   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-// }
