@@ -9,6 +9,7 @@ var gMeme = {
       size: 30,
       align: 'center',
       color: 'red',
+      strokeColor: 'black',
       font: 'Arial',
       posY: 40,
       posX: 200,
@@ -20,6 +21,7 @@ var gMeme = {
       size: 30,
       align: 'center',
       color: 'red',
+      strokeColor: 'black',
       font: 'Arial',
       posY: 340,
       posX: 200,
@@ -39,6 +41,7 @@ function setLineTxt(txt) {
     size: 30,
     align: 'center',
     color: 'red',
+    strokeColor: 'black',
     font: 'Arial',
     posY: 200,
     posX: 200,
@@ -70,6 +73,13 @@ function setImg(id) {
 
 function fillColor(color) {
   gMeme.lines[gMeme.selectedLineIdx].color = color;
+}
+
+function strokeColor(color) {
+  gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
+}
+function changeAligment(location) {
+  gMeme.lines[gMeme.selectedLineIdx].align = location;
 }
 
 function changeFontSize(operator) {
@@ -111,4 +121,8 @@ function removeLine() {
   if (!gMeme.lines.length) return;
   gMeme.lines.splice(gMeme.selectedLineIdx, 1);
   gMeme.selectedLineIdx = 0;
+}
+
+function selectFont(font) {
+  gMeme.lines[gMeme.selectedLineIdx].font = font;
 }

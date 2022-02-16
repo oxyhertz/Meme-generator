@@ -11,13 +11,29 @@ function init() {
   createCanvas();
   resizeCanvas();
   renderMeme();
+  addListeners();
+}
+
+function addListeners() {
   addMouseListeners();
+  addTouchListeners();
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    createCanvas();
+    renderMeme();
+  });
 }
 
 function addMouseListeners() {
   gElCanvas.addEventListener('mousemove', onMove);
   gElCanvas.addEventListener('mousedown', onDown);
   gElCanvas.addEventListener('mouseup', onUp);
+}
+
+function addTouchListeners() {
+  gElCanvas.addEventListener('touchmove', onMove);
+  gElCanvas.addEventListener('touchstart', onDown);
+  gElCanvas.addEventListener('touchend', onUp);
 }
 
 function createCanvas() {
@@ -35,11 +51,11 @@ function renderMeme() {
   var meme = getMeme();
   drawImg(meme);
   drawLines(meme);
-  //   focus();
 }
 
 function onAddText() {
-  const txt = document.querySelector('.input-txt').value;
+  const txt = document.querySelector('.input-txt').value.trim();
+  if (!txt) return;
   setLineTxt(txt);
   renderMeme();
   document.querySelector('.input-txt').value = '';
@@ -51,6 +67,11 @@ function onFillcolor() {
   renderMeme();
 }
 
+function onStrokeColor() {
+  var color = document.querySelector('.stroke-color').value;
+  strokeColor(color);
+  renderMeme();
+}
 function onSwitchLine() {
   switchLine();
   renderMeme();
@@ -58,11 +79,19 @@ function onSwitchLine() {
 }
 
 function onRemoveLine() {
-  console.log('hi');
   removeLine();
   renderMeme();
 }
 
+function onSelectFont() {
+  let font = document.querySelector('.fonts-select').value;
+  selectFont(font);
+  renderMeme();
+}
+function onChangeAligment(location) {
+  changeAligment(location);
+  renderMeme();
+}
 function onChangeFontSize(operator) {
   changeFontSize(operator);
   renderMeme();
@@ -85,7 +114,7 @@ function drawText(line) {
   gCtx.font = `${line.size}px ${line.font}`;
   gCtx.fillStyle = line.color;
   gCtx.textAlign = line.align;
-  gCtx.strokeStyle = 'black';
+  gCtx.strokeStyle = line.strokeColor;
   line.width = gCtx.measureText(txt).width;
   gCtx.fillText(txt, line.posX, line.posY);
   gCtx.strokeText(txt, line.posX, line.posY);

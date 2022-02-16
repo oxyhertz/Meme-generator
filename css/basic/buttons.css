@@ -1,0 +1,10 @@
+.operator-btn {
+  background-color: var(--clr2);
+  border-radius: 12px;
+  transition: background-color 0.3s;
+  padding: 11px 10.4px 9.7px 10.4px;
+}
+
+.operator-btn:hover {
+  background-color: var(--clr1);
+}

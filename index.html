@@ -30,41 +30,122 @@
             <canvas id="canvas" height="300" width="300"></canvas>
           </div>
           <div class="canvas-operation">
-            <input
-              class="input-txt"
-              type="text"
-              placeholder="Enter text"
-              name="txt"
-            />
-            <img
-              src="icons/add.png"
-              width="60px"
-              height="60px"
-              onclick="onAddText()"
-              alt=""
-            />
-            <input
-              class="fill-color"
-              type="color"
-              name="fill-color"
-              onchange="onFillcolor()"
-            />
-            <img
-              onclick="onSwitchLine()"
-              src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
-              width="60px"
-              height="60px"
-              alt=""
-            />
-            <img
-              onclick="onRemoveLine()"
-              src="icons/trash.png"
-              width="60px"
-              height="60px"
-              alt=""
-            />
-            <button class="incFont" onclick="onChangeFontSize(1)">+</button>
-            <button class="decFont" onclick="onChangeFontSize(-1)">-</button>
+            <div class="operator-container">
+              <input
+                oninput="onUpdateLineText()"
+                class="input-txt"
+                type="text"
+                placeholder="Enter text"
+                name="txt"
+              />
+              <img
+                class="operator-btn"
+                onclick="onSwitchLine()"
+                src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+              <img
+                class="operator-btn"
+                src="icons/add.png"
+                width="60px"
+                height="60px"
+                onclick="onAddText()"
+                alt=""
+              />
+
+              <img
+                class="operator-btn"
+                onclick="onRemoveLine()"
+                src="icons/trash.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+            </div>
+
+            <div class="operator-container">
+              <img
+                onclick="onChangeFontSize(1)"
+                class="operator-btn"
+                src="icons/increase font - icon.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+              <img
+                onclick="onChangeFontSize(-1)"
+                width="60px"
+                height="60px"
+                class="operator-btn"
+                src="icons/decrease font - icon.png"
+                alt=""
+              />
+              <div class="fill-color-div">
+                <img
+                  class="operator-btn"
+                  width="60px"
+                  height="60px"
+                  src="icons/paint-board-and-brush.png"
+                  alt=""
+                />
+                <input
+                  class="fill-color"
+                  type="color"
+                  name="fill-color"
+                  onchange="onFillcolor()"
+                />
+              </div>
+              <div class="fill-color-div">
+                <img
+                  class="operator-btn"
+                  width="60px"
+                  height="60px"
+                  src="icons/text stroke.png"
+                  alt=""
+                />
+                <input
+                  class="stroke-color"
+                  type="color"
+                  name="stroke-color"
+                  onchange="onStrokeColor()"
+                />
+              </div>
+              <img
+                onclick="onChangeAligment('center')"
+                class="operator-btn"
+                src="icons/center-text-alignment.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+              <img
+                onclick="onChangeAligment('left')"
+                class="operator-btn"
+                src="icons/align-to-left.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+              <img
+                onclick="onChangeAligment('right')"
+                class="operator-btn"
+                src="icons/align-to-right.png"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+              <select
+                class="btn fonts-select"
+                onchange="onSelectFont()"
+                name="font"
+              >
+                <option value="Impact">Impact</option>
+                <option value="Arial">Arial</option>
+                <option value="monospace">monospace</option>
+              </select>
+            </div>
           </div>
         </section>
       </section>
