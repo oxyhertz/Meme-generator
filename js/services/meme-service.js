@@ -5,9 +5,10 @@ var gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
-      txt: 'I sometimes eat Falafel',
+      txt: 'Edit Me !',
       size: 30,
       align: 'center',
+
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
@@ -17,7 +18,7 @@ var gMeme = {
       isDrag: false,
     },
     {
-      txt: 'I sometimes eat Falafel',
+      txt: 'Edit Me !',
       size: 30,
       align: 'center',
       color: 'red',

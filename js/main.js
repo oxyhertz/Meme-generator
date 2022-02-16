@@ -50,12 +50,10 @@ function resizeCanvas() {
 
 function updateText() {
   let elTxtVal = document.querySelector('.input-txt').value;
-  if (elTxtVal === '') return;
-  console.log(gIsUpdateText);
   if (!gIsUpdateText) return;
-  console.log('iam here updatetext');
   updateLineTxt(elTxtVal);
   renderMeme();
+  focused();
 }
 
 function renderMeme() {
@@ -67,10 +65,8 @@ function renderMeme() {
 function onAddText() {
   const txt = document.querySelector('.input-txt').value.trim();
   if (!txt) return;
-
   setLineTxt(txt);
   renderMeme();
-
   document.querySelector('.input-txt').value = '';
 }
 
@@ -145,7 +141,7 @@ function focused() {
   let meme = getMeme();
   let line = meme.lines[meme.selectedLineIdx];
   let width = line.width + 5;
-  let height = line.size + 5;
+  let height = line.size + 10;
   let startY = line.posY - line.size;
   let startX = line.posX - line.width / 2;
   switch (line.align) {
