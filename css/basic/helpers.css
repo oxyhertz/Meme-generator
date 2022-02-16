@@ -1,5 +1,11 @@
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.hidden-opacity {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .flex {
