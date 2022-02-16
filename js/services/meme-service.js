@@ -106,3 +106,9 @@ function moveCurrLine(dx, dy) {
   gMeme.lines[gMeme.selectedLineIdx].posX += dx;
   gMeme.lines[gMeme.selectedLineIdx].posY += dy;
 }
+
+function removeLine() {
+  if (!gMeme.lines.length) return;
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+  gMeme.selectedLineIdx = 0;
+}

@@ -57,6 +57,12 @@ function onSwitchLine() {
   focused();
 }
 
+function onRemoveLine() {
+  console.log('hi');
+  removeLine();
+  renderMeme();
+}
+
 function onChangeFontSize(operator) {
   changeFontSize(operator);
   renderMeme();

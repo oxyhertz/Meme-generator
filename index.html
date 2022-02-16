@@ -36,17 +36,35 @@
               placeholder="Enter text"
               name="txt"
             />
-            <button onclick="onAddText()">Add</button>
+            <img
+              src="icons/add.png"
+              width="60px"
+              height="60px"
+              onclick="onAddText()"
+              alt=""
+            />
             <input
               class="fill-color"
               type="color"
               name="fill-color"
               onchange="onFillcolor()"
             />
-
+            <img
+              onclick="onSwitchLine()"
+              src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
+              width="60px"
+              height="60px"
+              alt=""
+            />
+            <img
+              onclick="onRemoveLine()"
+              src="icons/trash.png"
+              width="60px"
+              height="60px"
+              alt=""
+            />
             <button class="incFont" onclick="onChangeFontSize(1)">+</button>
             <button class="decFont" onclick="onChangeFontSize(-1)">-</button>
-            <button class="switch-line" onclick="onSwitchLine()">Switch</button>
           </div>
         </section>
       </section>
