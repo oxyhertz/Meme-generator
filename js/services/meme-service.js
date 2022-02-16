@@ -7,7 +7,7 @@ var gMeme = {
     {
       txt: 'I sometimes eat Falafel',
       size: 30,
-      align: 'center',
+      align: 'right',
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
@@ -19,7 +19,7 @@ var gMeme = {
     {
       txt: 'I sometimes eat Falafel',
       size: 30,
-      align: 'center',
+      align: 'right',
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
@@ -48,6 +48,11 @@ function setLineTxt(txt) {
     isFocus: false,
     isDrag: false,
   });
+}
+
+function updateLineTxt(txt) {
+  if (txt === undefined) txt = '';
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 function createImgs() {

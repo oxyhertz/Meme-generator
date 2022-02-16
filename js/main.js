@@ -3,7 +3,7 @@
 var gCtx;
 var gElCanvas;
 var gStartPos;
-var gIsUpdateText;
+var gIsUpdateText = false;
 
 function init() {
   createImgs();
@@ -22,6 +22,8 @@ function addListeners() {
     createCanvas();
     renderMeme();
   });
+  let elTextInput = document.querySelector('.input-txt');
+  elTextInput.addEventListener('keyup', updateText);
 }
 
 function addMouseListeners() {
@@ -47,6 +49,16 @@ function resizeCanvas() {
   gElCanvas.height = elContainer.offsetHeight;
 }
 
+function updateText() {
+  let elTxtVal = document.querySelector('.input-txt').value;
+  if (elTxtVal === '') return;
+  console.log(gIsUpdateText);
+  if (!gIsUpdateText) return;
+  console.log('iam here updatetext');
+  updateLineTxt(elTxtVal);
+  renderMeme();
+}
+
 function renderMeme() {
   var meme = getMeme();
   drawImg(meme);
@@ -56,6 +68,7 @@ function renderMeme() {
 function onAddText() {
   const txt = document.querySelector('.input-txt').value.trim();
   if (!txt) return;
+
   setLineTxt(txt);
   renderMeme();
   document.querySelector('.input-txt').value = '';
@@ -75,6 +88,8 @@ function onStrokeColor() {
 function onSwitchLine() {
   switchLine();
   renderMeme();
+  gIsUpdateText = true;
+  updateInputVal(getCurrLine().txt);
   focused();
 }
 
@@ -146,15 +161,36 @@ function onDown(ev) {
   const pos = getEvPos(ev);
 
   var clickedLineIdx = meme.lines.findIndex(line => {
+    let lineX1Range = line.posX - line.width / 2;
+    let lineX2Range = line.posX + line.width / 2;
+    switch (line.align) {
+      case 'right':
+        lineX1Range = line.posX - line.width;
+        lineX2Range = line.posX + line.size;
+        break;
+      case 'left':
+        lineX1Range = line.posX;
+        lineX2Range = line.posX + line.width + line.size;
+    }
     return (
-      pos.x >= line.posX - line.width / 2 &&
-      pos.x <= line.posX + line.width / 2 &&
-      pos.y < line.posY &&
-      pos.y > line.posY - line.size
+      pos.x >= lineX1Range &&
+      pos.x <= lineX2Range &&
+      pos.y <= line.posY + line.size / 2 &&
+      pos.y >= line.posY - line.size
     );
+    // return (
+    //   pos.x >= line.posX - line.width / 2 &&
+    //   pos.x <= line.posX + line.width / 2 &&
+    //   pos.y < line.posY &&
+    //   pos.y > line.posY - line.size
+    // );
   });
+  updateInputVal('');
+  gIsUpdateText = false;
   if (clickedLineIdx < 0) return;
   meme.selectedLineIdx = clickedLineIdx;
+  gIsUpdateText = true;
+  updateInputVal(getCurrLine().txt);
   //   setLineFocus(true);
   //   focused();
   setLineDrag(true);
@@ -162,6 +198,9 @@ function onDown(ev) {
   document.body.style.cursor = 'grabbing';
 }
 
+function updateInputVal(val) {
+  document.querySelector('.input-txt').value = val;
+}
 function onMove(ev) {
   var line = getCurrLine();
   if (line.isDrag) {
