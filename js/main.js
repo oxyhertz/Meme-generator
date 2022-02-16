@@ -9,6 +9,7 @@ function init() {
   renderGallery(getImgs());
   createCanvas();
   resizeCanvas();
+  alignInitLines();
   renderMeme();
   addListeners();
 }
@@ -23,6 +24,13 @@ function addListeners() {
   });
   let elTextInput = document.querySelector('.input-txt');
   elTextInput.addEventListener('keyup', updateText);
+}
+
+function alignInitLines() {
+  let meme = getMeme();
+  meme.lines.forEach(line => {
+    line.posX = gElCanvas.width / 2;
+  });
 }
 
 function addMouseListeners() {

@@ -1,0 +1,6 @@
+@media (max-width: 920px) {
+  .canvas-container {
+    width: 300px;
+    height: 300px;
+  }
+}

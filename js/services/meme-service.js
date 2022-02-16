@@ -13,7 +13,7 @@ var gMeme = {
       strokeColor: 'black',
       font: 'Arial',
       posY: 40,
-      posX: 200,
+      posX: 0,
       isFocus: false,
       isDrag: false,
     },
@@ -24,7 +24,7 @@ var gMeme = {
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
-      posY: 340,
+      posY: 250,
       posX: 200,
       isFocus: false,
       isDrag: false,
@@ -65,6 +65,16 @@ function createImgs() {
   gImgs.push({
     id: 2,
     url: './images/meme-imgs/2.jpg',
+    keywords: ['funny', 'cat'],
+  });
+  gImgs.push({
+    id: 3,
+    url: './images/meme-imgs/3.jpg',
+    keywords: ['funny', 'cat'],
+  });
+  gImgs.push({
+    id: 4,
+    url: './images/meme-imgs/4.jpg',
     keywords: ['funny', 'cat'],
   });
 }

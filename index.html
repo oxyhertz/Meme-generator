@@ -10,7 +10,7 @@
   <body onload="init()">
     <header>
       <div class="main-header flex space-between align-center main-layout">
-        <img src="logo/LOGO.png" alt="" width="150px" />
+        <a href=""><img src="logo/LOGO.png" alt="" width="150px" /></a>
         <nav class="main-header-nav-container">
           <ul class="main-nav clean-list flex">
             <li><a href="#">Gallery</a></li>
@@ -37,34 +37,36 @@
                 placeholder="Enter text"
                 name="txt"
               />
-              <img
-                class="operator-btn"
-                onclick="onSwitchLine()"
-                src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
-                width="60px"
-                height="60px"
-                alt=""
-              />
-              <img
-                class="operator-btn"
-                src="icons/add.png"
-                width="60px"
-                height="60px"
-                onclick="onAddText()"
-                alt=""
-              />
+              <div class="canvas-operators-row">
+                <img
+                  class="operator-btn"
+                  onclick="onSwitchLine()"
+                  src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
+                  width="60px"
+                  height="60px"
+                  alt=""
+                />
+                <img
+                  class="operator-btn"
+                  src="icons/add.png"
+                  width="60px"
+                  height="60px"
+                  onclick="onAddText()"
+                  alt=""
+                />
 
-              <img
-                class="operator-btn"
-                onclick="onRemoveLine()"
-                src="icons/trash.png"
-                width="60px"
-                height="60px"
-                alt=""
-              />
+                <img
+                  class="operator-btn"
+                  onclick="onRemoveLine()"
+                  src="icons/trash.png"
+                  width="60px"
+                  height="60px"
+                  alt=""
+                />
+              </div>
             </div>
 
-            <div class="operator-container">
+            <div class="text-manipulation-container">
               <img
                 onclick="onChangeFontSize(1)"
                 class="operator-btn"
@@ -82,6 +84,12 @@
                 alt=""
               />
               <div class="fill-color-div">
+                <input
+                  class="fill-color"
+                  type="color"
+                  name="fill-color"
+                  onchange="onFillcolor()"
+                />
                 <img
                   class="operator-btn"
                   width="60px"
@@ -89,26 +97,20 @@
                   src="icons/paint-board-and-brush.png"
                   alt=""
                 />
-                <input
-                  class="fill-color"
-                  type="color"
-                  name="fill-color"
-                  onchange="onFillcolor()"
-                />
               </div>
               <div class="fill-color-div">
+                <input
+                  class="stroke-color"
+                  type="color"
+                  name="stroke-color"
+                  onchange="onStrokeColor()"
+                />
                 <img
                   class="operator-btn"
                   width="60px"
                   height="60px"
                   src="icons/text stroke.png"
                   alt=""
-                />
-                <input
-                  class="stroke-color"
-                  type="color"
-                  name="stroke-color"
-                  onchange="onStrokeColor()"
                 />
               </div>
               <img
@@ -145,6 +147,8 @@
                 <option value="monospace">monospace</option>
               </select>
             </div>
+            <div class="stickers-container"></div>
+            <div class="share-bar"></div>
           </div>
         </section>
       </section>
