@@ -15,4 +15,5 @@ function onImgSelect(id) {
   setImg(id);
   renderMeme();
   document.querySelector('.gallery').hidden = true;
+  document.querySelector('.editor').classList.remove('hidden');
 }
