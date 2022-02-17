@@ -12,6 +12,10 @@ header {
   line-height: 1.425;
 }
 
-.main-header .main-nav li:first-child {
-  margin-right: 20px;
+.main-nav > *:not(:last-child) {
+  margin-inline-end: 20px;
+}
+
+.main-nav li a:hover {
+  color: #000;
 }

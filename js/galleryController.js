@@ -19,4 +19,5 @@ function onImgSelect(id) {
   document.querySelector('.gallery').classList.add('hidden');
   document.querySelector('article').classList.add('hidden');
   document.querySelector('.editor').classList.remove('hidden-opacity');
+  document.querySelector('.main-content').style.height = '80vh';
 }

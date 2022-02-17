@@ -9,10 +9,23 @@
 }
 
 body.menu-open .main-screen {
+  z-index: 5;
   pointer-events: auto;
   opacity: 1;
 }
 
-body.menu-open .input-search {
-  z-index: -1;
+body.menu-open .main-nav {
+  z-index: 10;
+  text-align: center;
+}
+
+.nav-logo {
+  display: none;
+}
+body.menu-open .nav-logo {
+  display: block;
+}
+
+body.menu-open .main-header .main-nav > *:not(:last-child) {
+  margin-inline-end: 0;
 }
