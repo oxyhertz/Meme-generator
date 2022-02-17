@@ -5,22 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
+    <script
+      src="https://kit.fontawesome.com/d057301935.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Meme Generator</title>
   </head>
   <body onload="init()">
     <header>
-      <div class="main-header flex space-between align-center main-layout">
+      <div
+        class="main-header align-items flex space-between align-center main-layout"
+      >
         <a href=""><img src="logo/LOGO.png" alt="" width="150px" /></a>
         <nav class="main-header-nav-container">
           <ul class="main-nav clean-list flex">
             <li><a href="#">Gallery</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="#about">About</a></li>
           </ul>
         </nav>
       </div>
     </header>
     <nav class="main-nav-container">
-      <div class="page-nav main-layout">Nav</div>
+      <div class="page-nav main-layout">
+        <div class="search main-layout flex space-between">
+          <div class="search-container flex space-between align-center">
+            <input
+              class="input-search"
+              type="text"
+              placeholder="Enter search keyword"
+              name="search"
+            />
+            <button class="search-btn">
+              <img src="/ICONS/search-icon.png" class="search-icon" alt="" />
+            </button>
+          </div>
+
+          <div class="keywords-container flex align-items">
+            <span class="keyword" onclick="onKeyword(this, 'politicians')"
+              >politicians</span
+            >
+            <span class="keyword" onclick="onKeyword(this, 'happy')"
+              >happy</span
+            >
+            <span class="keyword" onclick="onKeyword(this, 'sweet')"
+              >cats
+            </span>
+            <span class="keyword" onclick="onKeyword(this, 'animals')"
+              >animals</span
+            >
+            <span class="more-keys" onclick="onMore()">more...</span>
+          </div>
+        </div>
+      </div>
     </nav>
     <main>
       <section class="main-content main-layout">
@@ -154,10 +190,46 @@
       </section>
     </main>
     <article>
-      <div class="about-me-container main-layout">ABOUT ME</div>
+      <div class="about-me-container main-layout flex align-center">
+        <img src="images/myself.jpg" class="profile-img" alt="" />
+        <div class="about-me-description">
+          <h3>Dima Polonchuk</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+            cupiditate, ipsa quo consequatur alias eum pariatur dicta expedita,
+            quos asperiores aut. Expedita quas distinctio accusamus commodi
+            adipisci natus ipsam architecto.
+          </p>
+          <ul class="social-nav clean-list flex">
+            <li>
+              <a href="#">
+                <i class="fa fa-brands fa-facebook-square fa-2x"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="">
+                <i class="fa fa-brands fa-twitter-square fa-2x"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-brands fa-google-plus-square fa-2x"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-brands fa-behance-square fa-2x"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </article>
-    <footer>
-      <div class="footer-container main-layout">Footer</div>
+    <footer class="main-footer" id="footer">
+      <div class="footer-container flex main-layout align-center">
+        <a href=""><img src="logo/LOGO.png" alt="" width="150px" /></a>
+        <p>all rights reserved 2022</p>
+      </div>
     </footer>
     <script src="js/services/meme-service.js"></script>
     <script src="js/galleryController.js"></script>

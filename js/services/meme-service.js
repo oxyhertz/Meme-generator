@@ -24,7 +24,7 @@ var gMeme = {
       color: 'red',
       strokeColor: 'black',
       font: 'Arial',
-      posY: 250,
+      posY: 400,
       posX: 200,
       isFocus: false,
       isDrag: false,

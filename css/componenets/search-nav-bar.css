@@ -1,0 +1,41 @@
+.page-nav {
+  padding: 20px 0 25px;
+}
+
+.main-nav-container {
+  background-color: var(--clr2);
+}
+
+.input-search {
+  border: none;
+  outline: none;
+  height: 100%;
+}
+
+.search {
+  align-items: center;
+}
+.search-container {
+  width: 250px;
+  border: none;
+  border-bottom: 2px solid black;
+  font-family: Montserrat;
+  position: relative;
+  padding: 5px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.search-btn {
+  background-color: rgba(255, 255, 255, 0);
+  height: 30px;
+  width: 30px;
+  border: none;
+}
+
+.keywords-container {
+  gap: 15px;
+}

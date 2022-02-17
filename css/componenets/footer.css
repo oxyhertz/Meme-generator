@@ -1,0 +1,9 @@
+.main-footer {
+  background-color: var(--clr1);
+
+  padding: 3rem 0;
+}
+
+.footer-container {
+  flex-direction: column;
+}

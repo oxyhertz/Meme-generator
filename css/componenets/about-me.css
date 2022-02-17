@@ -1,0 +1,21 @@
+.profile-img {
+  width: 16em;
+  height: 16em;
+  border-radius: 50%;
+  margin-right: 40px;
+}
+
+.about-me-container {
+  padding: 7.5rem 5.875rem 9.375rem 6.25rem;
+}
+
+.social-nav li {
+  margin-right: 0.5em;
+}
+.social-nav i {
+  color: var(--clr1);
+}
+
+.social-nav i:hover {
+  color: rgba(255, 128, 0, 0.445);
+}

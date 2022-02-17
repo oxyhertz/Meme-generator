@@ -13,6 +13,9 @@
 /* COMPONENET */
 @import 'componenets/canvas.css';
 @import 'componenets/main-header.css';
+@import 'componenets/search-nav-bar.css';
 @import 'componenets/nav-bar.css';
 @import 'componenets/main-content.css';
 @import 'components/editor.css';
+@import 'componenets/about-me.css';
+@import 'componenets/footer.css';
