@@ -208,13 +208,16 @@ function setLineDrag(isDrag) {
 }
 
 function setStickerDrag(isDrag) {
-  gMeme.lines[gMeme.selectedStickerIdx].isDrag = isDrag;
+  gMeme.stickers[gMeme.selectedStickerIdx].isDrag = isDrag;
 }
 
 function getCurrLine() {
   return gMeme.lines[gMeme.selectedLineIdx];
 }
 
+function getCurrSticker() {
+  return gMeme.stickers[gMeme.selectedStickerIdx];
+}
 function setLineFocus(isFocus) {
   gMeme.lines[gMeme.selectedLineIdx].focus = isFocus;
 }
@@ -222,6 +225,11 @@ function setLineFocus(isFocus) {
 function moveCurrLine(dx, dy) {
   gMeme.lines[gMeme.selectedLineIdx].posX += dx;
   gMeme.lines[gMeme.selectedLineIdx].posY += dy;
+}
+
+function moveCurrSticker(dx, dy) {
+  gMeme.stickers[gMeme.selectedStickerIdx].posX += dx;
+  gMeme.stickers[gMeme.selectedStickerIdx].posY += dy;
 }
 
 function removeLine() {

@@ -244,28 +244,37 @@ function onDown(ev) {
   updateInputVal('');
   gIsUpdateText = false;
   renderMeme();
+
   var clickedLineIdx = clickedLineIndex(pos, meme);
   var clickedStickerIdx = clickedStickerIndex(pos, meme);
-  if (clickedStickerIdx >= 0) {
+
+  if (clickedStickerIndex < 0 && clickedLineIdx < 0) return;
+
+  if (clickedLineIdx >= 0) {
+    meme.selectedLineIdx = clickedLineIdx;
+    gIsUpdateText = true;
+    updateInputVal(getCurrLine().txt);
+    focused();
+    setLineDrag(true);
+    gStartPos = pos;
+    document.body.style.cursor = 'grabbing';
+  } else if (clickedStickerIdx >= 0) {
     meme.selectedStickerIdx = clickedStickerIdx;
     setStickerDrag(true);
+    gStartPos = pos;
+    document.body.style.cursor = 'grabbing';
   }
-  if (clickedLineIdx < 0) return;
-  meme.selectedLineIdx = clickedLineIdx;
-  gIsUpdateText = true;
-  updateInputVal(getCurrLine().txt);
-  focused();
-  setLineDrag(true);
-  gStartPos = pos;
-  document.body.style.cursor = 'grabbing';
 }
 
 function updateInputVal(val) {
   document.querySelector('.input-txt').value = val;
 }
 function onMove(ev) {
-  var line = getCurrLine();
+  let line = getCurrLine();
+  let sticker = getCurrSticker();
+
   if (line.isDrag) {
+    console.log('line');
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;
@@ -274,10 +283,22 @@ function onMove(ev) {
     renderMeme();
     focused();
   }
+  if (sticker === undefined) return;
+  if (sticker.isDrag) {
+    const pos = getEvPos(ev);
+    const dx = pos.x - gStartPos.x;
+    const dy = pos.y - gStartPos.y;
+    moveCurrSticker(dx, dy);
+    gStartPos = pos;
+    renderMeme();
+  }
 }
 
 function onUp(ev) {
   setLineDrag(false);
+  let sticker = getCurrSticker();
+  if (sticker === undefined) return;
+  setStickerDrag(false);
   document.body.style.cursor = 'grab';
 }
 
