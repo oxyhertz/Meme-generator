@@ -116,6 +116,8 @@ function renderSticker() {
 }
 
 function renderSavedMemes() {
+  document.querySelector('.gallery').classList.remove('hidden');
+  document.querySelector('.editor').classList.add('hidden-opacity');
   let memes = getSavedMemes();
   var strHTML = memes
     .map((meme, idx) => {
