@@ -232,3 +232,7 @@ function getEvPos(ev) {
 
   return pos;
 }
+
+function toggleMenu() {
+  document.body.classList.toggle('menu-open');
+}

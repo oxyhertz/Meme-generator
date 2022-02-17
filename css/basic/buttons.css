@@ -11,4 +11,6 @@
 
 .btn-menu {
   display: none;
+  color: white;
+  font-size: 3rem;
 }
