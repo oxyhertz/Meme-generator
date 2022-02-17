@@ -4,6 +4,7 @@ var gCtx;
 var gElCanvas;
 var gStartPos;
 var gIsUpdateText = false;
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function init() {
   createImgs();
   renderGallery(getImgs());
@@ -76,12 +77,18 @@ function renderMeme() {
   drawStickers(meme);
 }
 
+function onSetNextPage(operator) {
+  setNextPage(operator);
+  renderSticker();
+}
+
 function renderSticker() {
   let stickers = getStickers();
+  console.log(stickers);
   let strHTML = `<img
   class="prevPage"
   src="icons/left-arrow.png"
-  onclick="onPrevPage()"
+  onclick="onSetNextPage(-1)"
   alt=""
   />`;
   strHTML += stickers
@@ -94,7 +101,7 @@ function renderSticker() {
   strHTML += `<img
   class="nextPage"
   src="icons/right-arrow.png"
-  onclick="onNextPage()"
+  onclick="onSetNextPage(1)"
   alt=""
 />`;
   document.querySelector('.stickers-container').innerHTML = strHTML;
@@ -119,11 +126,13 @@ function onAddSticker(id) {
 
 function drawSticker(sticker) {
   var elImg = document.querySelector(`.sticker-${sticker.id}`);
+  console.log(elImg);
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
 }
 
 function drawStickers(meme) {
   meme.stickers.forEach(sticker => {
+    console.log(sticker);
     drawSticker(sticker);
   });
 }
@@ -284,7 +293,7 @@ function onMove(ev) {
   let line = getCurrLine();
   let sticker = getCurrSticker();
 
-  if (line.isDrag) {
+  if (line && line.isDrag) {
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;
@@ -305,8 +314,8 @@ function onMove(ev) {
 }
 
 function onUp(ev) {
-  setLineDrag(false);
   let sticker = getCurrSticker();
+  setLineDrag(false);
   if (sticker === undefined) return;
   setStickerDrag(false);
   document.body.style.cursor = 'grab';
@@ -317,6 +326,14 @@ function getEvPos(ev) {
     x: ev.offsetX,
     y: ev.offsetY,
   };
+  if (gTouchEvs.includes(ev.type)) {
+    ev.preventDefault();
+    ev = ev.changedTouches[0];
+    pos = {
+      x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+    };
+  }
 
   return pos;
 }
