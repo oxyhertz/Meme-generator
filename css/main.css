@@ -8,7 +8,6 @@
 @import 'basic/layout.css';
 @import 'basic/helpers.css';
 @import 'basic/buttons.css';
-@import 'setup/mq.css';
 
 /* COMPONENET */
 @import 'componenets/canvas.css';
@@ -19,3 +18,4 @@
 @import 'components/editor.css';
 @import 'componenets/about-me.css';
 @import 'componenets/footer.css';
+@import 'setup/mq.css';

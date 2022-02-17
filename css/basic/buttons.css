@@ -8,3 +8,7 @@
 .operator-btn:hover {
   background-color: var(--clr1);
 }
+
+.btn-menu {
+  display: none;
+}
