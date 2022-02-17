@@ -5,6 +5,7 @@ var gElCanvas;
 var gStartPos;
 var gIsUpdateText = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+
 function init() {
   createImgs();
   renderGallery(getImgs());
@@ -132,13 +133,11 @@ function onAddSticker(id) {
 
 function drawSticker(sticker) {
   var elImg = document.querySelector(`.sticker-${sticker.id}`);
-  console.log(elImg);
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
 }
 
 function drawStickers(meme) {
   meme.stickers.forEach(sticker => {
-    console.log(sticker);
     drawSticker(sticker);
   });
 }

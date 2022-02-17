@@ -16,6 +16,7 @@ function renderGallery(images) {
 function onImgSelect(id) {
   setImg(id);
   renderMeme();
+  document.querySelector('.main-nav-container').classList.add('hidden');
   document.querySelector('.gallery').classList.add('hidden');
   document.querySelector('article').classList.add('hidden');
   document.querySelector('.editor').classList.remove('hidden-opacity');

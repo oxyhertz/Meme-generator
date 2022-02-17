@@ -20,3 +20,7 @@
   height: 38px;
   cursor: pointer;
 }
+
+.editor {
+  transition: opacity 0.3s;
+}
