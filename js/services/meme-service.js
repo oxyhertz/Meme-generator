@@ -1,4 +1,7 @@
 'use strict';
+
+const PAGE_SIZE = 3;
+var gPageIdx = 0;
 var gImgs = [];
 var gStickers = [1, 2, 3, 4];
 var gMeme = {
@@ -65,7 +68,8 @@ function setSticker(id, posY, posX) {
 }
 
 function getStickers() {
-  return gStickers;
+  var startIdx = gPageIdx * PAGE_SIZE;
+  return gStickers.slice(startIdx, startIdx + PAGE_SIZE);
 }
 
 function updateLineTxt(txt) {

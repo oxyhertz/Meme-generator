@@ -78,14 +78,25 @@ function renderMeme() {
 
 function renderSticker() {
   let stickers = getStickers();
-  let strHTML = stickers
+  let strHTML = `<img
+  class="prevPage"
+  src="icons/left-arrow.png"
+  onclick="onPrevPage()"
+  alt=""
+  />`;
+  strHTML += stickers
     .map(sticker => {
       return `
     <img src="Stickers/${sticker}.png" class="sticker sticker-${sticker}" onclick="onAddSticker(${sticker})">
       `;
     })
     .join('');
-
+  strHTML += `<img
+  class="nextPage"
+  src="icons/right-arrow.png"
+  onclick="onNextPage()"
+  alt=""
+/>`;
   document.querySelector('.stickers-container').innerHTML = strHTML;
 }
 
@@ -274,7 +285,6 @@ function onMove(ev) {
   let sticker = getCurrSticker();
 
   if (line.isDrag) {
-    console.log('line');
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;

@@ -1,0 +1,22 @@
+.sticker {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.stickers-container {
+  margin-top: 2em;
+  display: flex;
+  background-color: var(--clr2);
+  justify-content: space-evenly;
+  border-radius: 12px;
+  padding: 2em 0.5em;
+  align-items: center;
+}
+
+.prevPage,
+.nextPage {
+  width: 24px;
+  height: 38px;
+  cursor: pointer;
+}
