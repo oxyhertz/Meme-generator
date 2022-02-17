@@ -4,6 +4,7 @@ var gStickers = [1, 2, 3, 4];
 var gMeme = {
   selectedImgId: 2,
   selectedLineIdx: 0,
+  selectedStickerIdx: 0,
   lines: [
     {
       txt: 'Edit Me !',
@@ -204,6 +205,10 @@ function switchLine() {
 
 function setLineDrag(isDrag) {
   gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag;
+}
+
+function setStickerDrag(isDrag) {
+  gMeme.lines[gMeme.selectedStickerIdx].isDrag = isDrag;
 }
 
 function getCurrLine() {

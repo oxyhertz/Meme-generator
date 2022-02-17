@@ -204,13 +204,8 @@ function focused() {
   gCtx.stroke();
 }
 
-function isTextClicked(pos) {}
-
-function onDown(ev) {
-  var meme = getMeme();
-  const pos = getEvPos(ev);
-
-  var clickedLineIdx = meme.lines.findIndex(line => {
+function clickedLineIndex(pos, meme) {
+  return meme.lines.findIndex(line => {
     let lineX1Range = line.posX - line.width / 2;
     let lineX2Range = line.posX + line.width / 2;
     switch (line.align) {
@@ -229,9 +224,32 @@ function onDown(ev) {
       pos.y >= line.posY - line.size
     );
   });
+}
+
+function clickedStickerIndex(pos, meme) {
+  return meme.stickers.findIndex(sticker => {
+    return (
+      sticker.posY <= pos.y &&
+      sticker.posY + sticker.size >= pos.y &&
+      sticker.posX <= pos.x &&
+      sticker.posX + sticker.size * 2 >= pos.x
+    );
+  });
+}
+
+function onDown(ev) {
+  var meme = getMeme();
+  const pos = getEvPos(ev);
+
   updateInputVal('');
   gIsUpdateText = false;
   renderMeme();
+  var clickedLineIdx = clickedLineIndex(pos, meme);
+  var clickedStickerIdx = clickedStickerIndex(pos, meme);
+  if (clickedStickerIdx >= 0) {
+    meme.selectedStickerIdx = clickedStickerIdx;
+    setStickerDrag(true);
+  }
   if (clickedLineIdx < 0) return;
   meme.selectedLineIdx = clickedLineIdx;
   gIsUpdateText = true;
