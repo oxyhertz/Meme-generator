@@ -12,6 +12,7 @@ function init() {
   alignInitLines();
   renderMeme();
   addListeners();
+  renderSticker();
 }
 
 function addListeners() {
@@ -19,6 +20,7 @@ function addListeners() {
   addTouchListeners();
   window.addEventListener('resize', () => {
     resizeCanvas();
+    alignInitLines();
     createCanvas();
     renderMeme();
   });
@@ -28,8 +30,11 @@ function addListeners() {
 
 function alignInitLines() {
   let meme = getMeme();
+  var heightPos = 40;
   meme.lines.forEach(line => {
     line.posX = gElCanvas.width / 2;
+    line.posY = heightPos;
+    heightPos = gElCanvas.height - 40;
   });
 }
 
@@ -68,16 +73,55 @@ function renderMeme() {
   var meme = getMeme();
   drawImg(meme);
   drawLines(meme);
+  drawStickers(meme);
+}
+
+function renderSticker() {
+  let stickers = getStickers();
+  let strHTML = stickers
+    .map(sticker => {
+      return `
+    <img src="Stickers/${sticker}.png" class="sticker sticker-${sticker}" onclick="onAddSticker(${sticker})">
+      `;
+    })
+    .join('');
+
+  document.querySelector('.stickers-container').innerHTML = strHTML;
 }
 
 function onAddText() {
   const txt = document.querySelector('.input-txt').value.trim();
   if (!txt) return;
-  setLineTxt(txt);
+  let posY = gElCanvas.height / 2;
+  let posX = gElCanvas.width / 2;
+  setLineTxt(txt, posY, posX);
   renderMeme();
   document.querySelector('.input-txt').value = '';
 }
+//  <img class="sticker sticker-{id} onclick="onAddSticker{id}">
+function onAddSticker(id) {
+  let posY = gElCanvas.height / 2;
+  let posX = gElCanvas.width / 2;
+  setSticker(id, posY, posX);
+  renderMeme();
+}
 
+function drawSticker(sticker) {
+  var elImg = document.querySelector(`.sticker-${sticker.id}`);
+  gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
+}
+
+function drawStickers(meme) {
+  meme.stickers.forEach(sticker => {
+    drawSticker(sticker);
+  });
+}
+
+function drawLines(meme) {
+  meme.lines.forEach(line => {
+    drawText(line);
+  });
+}
 function onFillcolor() {
   var color = document.querySelector('.fill-color').value;
   fillColor(color);
@@ -127,15 +171,9 @@ function drawImg(meme) {
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
-function drawLines(meme) {
-  meme.lines.forEach(line => {
-    drawText(line);
-  });
-}
-
 function drawText(line) {
   let txt = line.txt;
-  gCtx.lineWidth = 1;
+  gCtx.lineWidth = 2;
   gCtx.font = `${line.size}px ${line.font}`;
   gCtx.fillStyle = line.color;
   gCtx.textAlign = line.align;
@@ -165,6 +203,8 @@ function focused() {
   gCtx.strokeStyle = 'black';
   gCtx.stroke();
 }
+
+function isTextClicked(pos) {}
 
 function onDown(ev) {
   var meme = getMeme();
@@ -196,7 +236,6 @@ function onDown(ev) {
   meme.selectedLineIdx = clickedLineIdx;
   gIsUpdateText = true;
   updateInputVal(getCurrLine().txt);
-  setLineFocus(true);
   focused();
   setLineDrag(true);
   gStartPos = pos;

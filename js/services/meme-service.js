@@ -1,17 +1,18 @@
 'use strict';
 var gImgs = [];
+var gStickers = [1, 2, 3, 4];
 var gMeme = {
   selectedImgId: 2,
   selectedLineIdx: 0,
   lines: [
     {
       txt: 'Edit Me !',
-      size: 30,
+      size: 40,
       align: 'center',
 
-      color: 'red',
+      color: 'white',
       strokeColor: 'black',
-      font: 'Arial',
+      font: 'Impact',
       posY: 40,
       posX: 0,
       isFocus: false,
@@ -19,36 +20,51 @@ var gMeme = {
     },
     {
       txt: 'Edit Me !',
-      size: 30,
+      size: 40,
       align: 'center',
-      color: 'red',
+      color: 'white',
       strokeColor: 'black',
-      font: 'Arial',
+      font: 'Impact',
       posY: 400,
       posX: 200,
       isFocus: false,
       isDrag: false,
     },
   ],
+  stickers: [],
 };
 
 function getMeme() {
   return gMeme;
 }
 
-function setLineTxt(txt) {
+function setLineTxt(txt, posY, posX) {
   gMeme.lines.push({
     txt,
-    size: 30,
+    size: 40,
     align: 'center',
-    color: 'red',
+    color: 'white',
     strokeColor: 'black',
-    font: 'Arial',
-    posY: 200,
-    posX: 200,
+    font: 'Impact',
+    posY,
+    posX,
     isFocus: false,
     isDrag: false,
   });
+}
+
+function setSticker(id, posY, posX) {
+  gMeme.stickers.push({
+    id,
+    size: 60,
+    posY,
+    posX,
+    isDrag: false,
+  });
+}
+
+function getStickers() {
+  return gStickers;
 }
 
 function updateLineTxt(txt) {
@@ -65,17 +81,87 @@ function createImgs() {
   gImgs.push({
     id: 2,
     url: './images/meme-imgs/2.jpg',
-    keywords: ['funny', 'cat'],
+    keywords: ['animal', 'cute', 'dog'],
   });
   gImgs.push({
     id: 3,
     url: './images/meme-imgs/3.jpg',
-    keywords: ['funny', 'cat'],
+    keywords: ['animal', 'cute', 'dog'],
   });
   gImgs.push({
     id: 4,
     url: './images/meme-imgs/4.jpg',
-    keywords: ['funny', 'cat'],
+    keywords: ['funny', 'cat', 'animal'],
+  });
+  gImgs.push({
+    id: 5,
+    url: './images/meme-imgs/5.jpg',
+    keywords: ['baby', 'funny'],
+  });
+  gImgs.push({
+    id: 6,
+    url: './images/meme-imgs/6.jpg',
+    keywords: ['politics', 'funny'],
+  });
+  gImgs.push({
+    id: 7,
+    url: './images/meme-imgs/7.jpg',
+    keywords: ['baby', 'explain'],
+  });
+  gImgs.push({
+    id: 8,
+    url: './images/meme-imgs/8.jpg',
+    keywords: ['explain', 'cat'],
+  });
+  gImgs.push({
+    id: 9,
+    url: './images/meme-imgs/9.jpg',
+    keywords: ['baby', 'funny'],
+  });
+  gImgs.push({
+    id: 10,
+    url: './images/meme-imgs/10.jpg',
+    keywords: ['politics', 'funny'],
+  });
+  gImgs.push({
+    id: 11,
+    url: './images/meme-imgs/11.jpg',
+    keywords: ['explain', 'sport'],
+  });
+  gImgs.push({
+    id: 12,
+    url: './images/meme-imgs/12.jpg',
+    keywords: ['dontsay', 'explain'],
+  });
+  gImgs.push({
+    id: 13,
+    url: './images/meme-imgs/13.jpg',
+    keywords: ['dontsay', 'explain'],
+  });
+  gImgs.push({
+    id: 14,
+    url: './images/meme-imgs/14.jpg',
+    keywords: ['matrix', 'seriously'],
+  });
+  gImgs.push({
+    id: 15,
+    url: './images/meme-imgs/15.jpg',
+    keywords: ['dontsay', 'explain'],
+  });
+  gImgs.push({
+    id: 16,
+    url: './images/meme-imgs/16.jpg',
+    keywords: ['politics', 'person'],
+  });
+  gImgs.push({
+    id: 17,
+    url: './images/meme-imgs/17.jpg',
+    keywords: ['politics', 'person'],
+  });
+  gImgs.push({
+    id: 18,
+    url: './images/meme-imgs/18.jpg',
+    keywords: ['toy', 'show'],
   });
 }
 
