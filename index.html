@@ -23,6 +23,7 @@
             <a class="nav-logo" href=""
               ><img src="logo/LOGO.png" alt="" width="150px"
             /></a>
+            <li><a href="#" onclick="renderSavedMemes()">Memes</a></li>
             <li class=""><a href="index.html">Gallery</a></li>
             <li><a href="#about">About</a></li>
           </ul>
@@ -114,9 +115,17 @@
                   height="60px"
                   alt=""
                 />
+                <img
+                  class="operator-btn"
+                  onclick="onSaveMeme()"
+                  src="icons/save.png"
+                  width="60px"
+                  height="60px"
+                  alt=""
+                  onclick="onSaveMeme()"
+                />
               </div>
             </div>
-
             <div class="text-manipulation-container">
               <img
                 onclick="onChangeFontSize(1)"

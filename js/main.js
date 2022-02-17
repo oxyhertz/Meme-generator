@@ -4,6 +4,7 @@ var gCtx;
 var gElCanvas;
 var gStartPos;
 var gIsUpdateText = false;
+var gUserImg;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
@@ -114,6 +115,35 @@ function renderSticker() {
   document.querySelector('.stickers-container').innerHTML = strHTML;
 }
 
+function renderSavedMemes() {
+  let memes = getSavedMemes();
+  var strHTML = memes
+    .map((meme, idx) => {
+      return `
+    <img class="user-meme user-meme-${idx}" src="${meme.url}" alt="" onclick="onUserMeme(${idx})">
+    `;
+    })
+    .join('');
+  if (!memes.length) strHTML = '<h1>There are no saved memes to display</h1>';
+
+  document.querySelector('.gallery').innerHTML = strHTML;
+}
+
+function onUserMeme(idx) {
+  // setImg(id);
+  var savedMemes = getSavedMemes();
+  gMeme = savedMemes[idx];
+  gUserImg = savedMemes[idx].url;
+  // renderMeme();
+  drawLines(gMeme);
+  drawStickers(gMeme);
+  document.querySelector('.main-nav-container').classList.add('hidden');
+  document.querySelector('.gallery').classList.add('hidden');
+  document.querySelector('article').classList.add('hidden');
+  document.querySelector('.editor').classList.remove('hidden-opacity');
+  document.querySelector('.main-content').style.height = '1200px';
+}
+
 function onAddText() {
   const txt = document.querySelector('.input-txt').value.trim();
   if (!txt) return;
@@ -123,7 +153,7 @@ function onAddText() {
   renderMeme();
   document.querySelector('.input-txt').value = '';
 }
-//  <img class="sticker sticker-{id} onclick="onAddSticker{id}">
+
 function onAddSticker(id) {
   let posY = gElCanvas.height / 2;
   let posX = gElCanvas.width / 2;
@@ -147,6 +177,12 @@ function drawLines(meme) {
     drawText(line);
   });
 }
+
+function onSaveMeme() {
+  var imgUrl = gElCanvas.toDataURL('img/jpg');
+  saveMeme(imgUrl);
+}
+
 function onFillcolor() {
   var color = document.querySelector('.fill-color').value;
   fillColor(color);
@@ -193,6 +229,11 @@ function onChangeFontSize(operator) {
 
 function drawImg(meme) {
   var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
+  if (gUserImg) {
+    elImg = new Image();
+    elImg.src = `images/meme-imgs/${meme.selectedImgId}.jpg`;
+  }
+
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 

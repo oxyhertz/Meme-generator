@@ -1,6 +1,8 @@
 'use strict';
-
 const PAGE_SIZE = 3;
+const STORAGE_KEY = 'savedMemesDB';
+
+var gSavedMemes;
 var gPageIdx = 0;
 var gFilter = '';
 var gImgs = [];
@@ -66,6 +68,25 @@ function setSticker(id, posY, posX) {
     posX,
     isDrag: false,
   });
+}
+
+function getSavedMemes() {
+  var memes = loadFromStorage(STORAGE_KEY);
+  if (!memes || !memes.length) memes = [];
+  return memes;
+}
+
+function saveMeme(url) {
+  var memes = loadFromStorage(STORAGE_KEY);
+  if (!memes || !memes.length) memes = [];
+  gMeme.url = url;
+  memes.push(gMeme);
+  gSavedMemes = memes;
+  _saveMemeToStorage();
+}
+
+function _saveMemeToStorage() {
+  saveToStorage(STORAGE_KEY, gSavedMemes);
 }
 
 function updateLineTxt(txt) {
@@ -262,24 +283,9 @@ function setFilter(filterBy) {
 }
 
 function getImgsForDisplay() {
-  var imgs = gImgs.filter(img => {
+  return gImgs.filter(img => {
     return img.keywords.some(word => {
       return word.includes(gFilter);
     });
   });
-  return imgs;
 }
-
-// function nextPage() {
-//   gPageIdx++;
-//   if (gPageIdx * PAGE_SIZE >= gStickers.length) {
-//     gPageIdx = 0;
-//   }
-// }
-
-// function prevPage() {
-//   gPageIdx--;
-//   if (gPageIdx < 0) {
-//     gPageIdx = Math.ceil(gStickers.length / PAGE_SIZE - 1);
-//   }
-// }
