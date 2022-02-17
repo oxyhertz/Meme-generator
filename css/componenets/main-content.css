@@ -105,3 +105,7 @@ main {
   grid-column: 3/6;
   font-size: 1.25rem;
 }
+
+.share-bar {
+  margin-top: 1.25em;
+}

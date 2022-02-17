@@ -14,3 +14,22 @@
   color: white;
   font-size: 3rem;
 }
+
+.btn {
+  background-color: var(--clr1);
+  border-radius: 11px;
+  text-align: center;
+  padding: 1.218rem 1.93rem 1rem 1.875rem;
+  font-size: 1.25rem;
+  color: var(--clr2);
+  border: none;
+}
+
+.btn-share {
+  font-family: Montserrat;
+  cursor: pointer;
+}
+
+.btn-share a {
+  color: var(--clr2);
+}

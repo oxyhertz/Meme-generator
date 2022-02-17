@@ -39,6 +39,7 @@
               type="text"
               placeholder="Enter search keyword"
               name="search"
+              oninput="onSetFilter(this.value)"
             />
             <button class="search-btn">
               <img src="/ICONS/search-icon.png" class="search-icon" alt="" />
@@ -189,7 +190,20 @@
               </select>
             </div>
             <div class="stickers-container"></div>
-            <div class="share-bar"></div>
+            <div class="share-bar">
+              <a
+                href="#"
+                class="btn"
+                onclick="downloadImg(this)"
+                download="my-img.jpg"
+                >Download as jpeg</a
+              >
+              <button class="btn btn-share" onclick="uploadImg()">
+                Share<span class="share-canvas"></span>
+              </button>
+
+              <div class="share-container"></div>
+            </div>
           </div>
         </section>
       </section>
@@ -238,6 +252,7 @@
     </footer>
     <script src="js/services/meme-service.js"></script>
     <script src="js/galleryController.js"></script>
+    <script src="js/services/upload-service.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

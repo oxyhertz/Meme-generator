@@ -2,6 +2,7 @@
 
 const PAGE_SIZE = 3;
 var gPageIdx = 0;
+var gFilter = '';
 var gImgs = [];
 var gStickers = [1, 2, 3, 4];
 var gMeme = {
@@ -254,6 +255,19 @@ function setNextPage(operator) {
     gPageIdx = 0;
   }
   console.log(gPageIdx);
+}
+
+function setFilter(filterBy) {
+  gFilter = filterBy.toLowerCase();
+}
+
+function getImgsForDisplay() {
+  var imgs = gImgs.filter(img => {
+    return img.keywords.some(word => {
+      return word.includes(gFilter);
+    });
+  });
+  return imgs;
 }
 
 // function nextPage() {

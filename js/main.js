@@ -82,6 +82,12 @@ function onSetNextPage(operator) {
   renderSticker();
 }
 
+function onSetFilter(filterBy) {
+  setFilter(filterBy);
+  var images = getImgsForDisplay();
+  renderGallery(images);
+}
+
 function renderSticker() {
   let stickers = getStickers();
   console.log(stickers);
@@ -340,4 +346,9 @@ function getEvPos(ev) {
 
 function toggleMenu() {
   document.body.classList.toggle('menu-open');
+}
+
+function downloadImg(elLink) {
+  var imgContent = gElCanvas.toDataURL('image/jpeg');
+  elLink.href = imgContent;
 }
