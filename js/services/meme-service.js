@@ -1,5 +1,5 @@
 'use strict';
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 const STORAGE_KEY = 'savedMemesDB';
 
 var gSavedMemes;
@@ -9,8 +9,9 @@ var gImgs = [];
 var gStickers = [1, 2, 3, 4];
 var gMeme = {
   selectedImgId: 2,
-  selectedLineIdx: 0,
+  selectedLineIdx: -1,
   selectedStickerIdx: 0,
+  gIsClickOnSticker: false,
   lines: [
     {
       txt: 'Edit Me !',
@@ -196,17 +197,28 @@ function setImg(id) {
 }
 
 function fillColor(color) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].color = color;
 }
 
 function strokeColor(color) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
 }
 function changeAligment(location) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].align = location;
 }
 
 function changeFontSize(operator) {
+  if (gMeme.gIsClickOnSticker) {
+    console.log(gMeme);
+    var currSticker = gMeme.stickers[gMeme.selectedStickerIdx];
+    console.log(currSticker.size);
+    currSticker.size += 5 * operator;
+    console.log(currSticker.size);
+  }
+  if (isLineNotSelected()) return;
   var fontSize = gMeme.lines[gMeme.selectedLineIdx].size;
   gMeme.lines[gMeme.selectedLineIdx].size = fontSize + 3 * operator;
 }
@@ -225,6 +237,7 @@ function switchLine() {
 }
 
 function setLineDrag(isDrag) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag;
 }
 
@@ -240,6 +253,7 @@ function getCurrSticker() {
   return gMeme.stickers[gMeme.selectedStickerIdx];
 }
 function setLineFocus(isFocus) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].focus = isFocus;
 }
 
@@ -255,11 +269,13 @@ function moveCurrSticker(dx, dy) {
 
 function removeLine() {
   if (!gMeme.lines.length) return;
+  if (isLineNotSelected()) return;
   gMeme.lines.splice(gMeme.selectedLineIdx, 1);
-  gMeme.selectedLineIdx = 0;
+  gMeme.selectedLineIdx = -1;
 }
 
 function selectFont(font) {
+  if (isLineNotSelected()) return;
   gMeme.lines[gMeme.selectedLineIdx].font = font;
 }
 
@@ -288,4 +304,9 @@ function getImgsForDisplay() {
       return word.includes(gFilter);
     });
   });
+}
+
+function isLineNotSelected() {
+  if (gMeme.selectedLineIdx === -1) return true;
+  return false;
 }

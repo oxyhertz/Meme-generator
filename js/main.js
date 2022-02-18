@@ -74,6 +74,7 @@ function updateText() {
 
 function renderMeme() {
   var meme = getMeme();
+  console.log(meme.selectedLineIdx);
   drawImg(meme);
   drawLines(meme);
   drawStickers(meme);
@@ -165,19 +166,11 @@ function onAddSticker(id) {
 
 function drawSticker(sticker) {
   var elImg = document.querySelector(`.sticker-${sticker.id}`);
-  console.log(elImg);
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
-
-  // var img = new Image();
-  // img.onload = () => {
-  //   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-  // };
-  // img.src = `sticker/${sticker.id}.jpg`;
 }
 
 function drawStickers(meme) {
   meme.stickers.forEach(sticker => {
-    console.log(sticker);
     drawSticker(sticker);
   });
 }
@@ -233,6 +226,7 @@ function onChangeAligment(location) {
 }
 function onChangeFontSize(operator) {
   changeFontSize(operator);
+  // if (stickerClicked) changeStickerSize();
   renderMeme();
   focused();
 }
@@ -261,11 +255,21 @@ function drawText(line) {
 
 function focused() {
   let meme = getMeme();
+
+  if (meme.selectedLineIdx === -1) return;
+
+  // if (meme.gIsClickOnSticker) {
+  //   let currSticker = meme.stickers[meme.selectedStickerIdx];
+  //   let width = line.width + 20;
+  //   let height = line.size + 10;
+  //   let startY = line.posY - line.size;
+  //   let startX = line.posX - line.width / 2 - 10;
+  // }
   let line = meme.lines[meme.selectedLineIdx];
-  let width = line.width + 5;
+  let width = line.width + 20;
   let height = line.size + 10;
   let startY = line.posY - line.size;
-  let startX = line.posX - line.width / 2;
+  let startX = line.posX - line.width / 2 - 10;
   switch (line.align) {
     case 'right':
       startX -= line.width / 2;
@@ -324,6 +328,8 @@ function onDown(ev) {
   var clickedLineIdx = clickedLineIndex(pos, meme);
   var clickedStickerIdx = clickedStickerIndex(pos, meme);
 
+  meme.selectedLineIdx = -1;
+
   if (clickedStickerIndex < 0 && clickedLineIdx < 0) return;
 
   if (clickedLineIdx >= 0) {
@@ -334,7 +340,9 @@ function onDown(ev) {
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
+    meme.gIsClickOnSticker = false;
   } else if (clickedStickerIdx >= 0) {
+    meme.gIsClickOnSticker = true;
     meme.selectedStickerIdx = clickedStickerIdx;
     setStickerDrag(true);
     gStartPos = pos;
