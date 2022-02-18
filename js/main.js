@@ -102,7 +102,7 @@ function renderSticker() {
   strHTML += stickers
     .map(sticker => {
       return `
-    <img src="Stickers/${sticker}.png" class="sticker sticker-${sticker}" onclick="onAddSticker(${sticker})">
+    <img src="stickers/${sticker}.png" class="sticker sticker-${sticker}" onclick="onAddSticker(${sticker})">
       `;
     })
     .join('');
@@ -165,11 +165,19 @@ function onAddSticker(id) {
 
 function drawSticker(sticker) {
   var elImg = document.querySelector(`.sticker-${sticker.id}`);
+  console.log(elImg);
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
+
+  var img = new Image();
+  img.onload = () => {
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+  };
+  img.src = `sticker/${sticker.id}.jpg`;
 }
 
 function drawStickers(meme) {
   meme.stickers.forEach(sticker => {
+    console.log(sticker);
     drawSticker(sticker);
   });
 }
