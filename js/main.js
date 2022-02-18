@@ -168,11 +168,11 @@ function drawSticker(sticker) {
   console.log(elImg);
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
 
-  var img = new Image();
-  img.onload = () => {
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-  };
-  img.src = `sticker/${sticker.id}.jpg`;
+  // var img = new Image();
+  // img.onload = () => {
+  //   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+  // };
+  // img.src = `sticker/${sticker.id}.jpg`;
 }
 
 function drawStickers(meme) {
