@@ -94,11 +94,9 @@ main {
   grid-template-rows: 1fr 1fr;
   gap: 15px;
 }
-
-.text-manipulation-container img {
-  /* margin-left: 18px; */
+.text-manipulation-container > * {
+  cursor: pointer;
 }
-
 .fonts-select {
   padding: 18.4px 13px 17.6px 20.3px;
   font-family: Montserrat;
