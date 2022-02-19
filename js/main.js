@@ -12,7 +12,6 @@ var gImportImg = {
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
-  // createImgs();
   renderPrimaryKeywords();
   renderMoreKeywords();
   renderGallery(getImgs());
