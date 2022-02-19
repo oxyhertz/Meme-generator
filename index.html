@@ -23,6 +23,17 @@
             <a class="nav-logo" href=""
               ><img src="logo/LOGO.png" alt="" width="150px"
             /></a>
+            <li>
+              <label for="user-img-input"><a>Import</a></label>
+              <input
+                hidden
+                type="file"
+                class="user-img-input"
+                name="user-img-input"
+                id="user-img-input"
+                onchange="onImgInput(event)"
+              />
+            </li>
             <li><a href="#" onclick="renderSavedMemes()">Memes</a></li>
             <li class=""><a href="index.html">Gallery</a></li>
             <li><a href="#about">About</a></li>

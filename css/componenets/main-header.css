@@ -19,3 +19,7 @@ header {
 .main-nav li a:hover {
   color: #000;
 }
+
+.user-img-input {
+  /* opacity: 0; */
+}

@@ -5,6 +5,10 @@ var gElCanvas;
 var gStartPos;
 var gIsUpdateText = false;
 var gUserImg;
+var gImportImg = {
+  isImport: false,
+  src: '',
+};
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
@@ -120,6 +124,7 @@ function renderSticker() {
 function renderSavedMemes() {
   document.querySelector('.gallery').classList.remove('hidden');
   document.querySelector('.editor').classList.add('hidden-opacity');
+  gImportImg.isImport = false;
   let memes = getSavedMemes();
   var strHTML = memes
     .map((meme, idx) => {
@@ -134,7 +139,6 @@ function renderSavedMemes() {
 }
 
 function onUserMeme(idx) {
-  // setImg(id);
   var savedMemes = getSavedMemes();
   var meme = getMeme();
   gMeme = savedMemes[idx];
@@ -143,11 +147,8 @@ function onUserMeme(idx) {
   renderMeme();
   drawLines(gMeme);
   drawStickers(gMeme);
-  document.querySelector('.main-nav-container').classList.add('hidden');
-  document.querySelector('.gallery').classList.add('hidden');
-  document.querySelector('article').classList.add('hidden');
-  document.querySelector('.editor').classList.remove('hidden-opacity');
-  document.querySelector('.main-content').style.height = '1200px';
+
+  hideGallery();
 }
 
 function onAddText() {
@@ -245,9 +246,13 @@ function onKeyword(el) {
 function drawImg(meme) {
   var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
   if (gUserImg) {
-    console.log('hiihii');
     elImg = new Image();
     elImg.src = `images/meme-imgs/${meme.selectedImgId}.jpg`;
+  }
+
+  if (gImportImg.isImport) {
+    elImg = new Image();
+    elImg.src = gImportImg.src;
   }
 
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
@@ -451,6 +456,31 @@ function getEvPos(ev) {
   }
 
   return pos;
+}
+
+function onImgInput(ev) {
+  loadImageFromInput(ev, renderImg);
+}
+
+function loadImageFromInput(ev, onImageReady) {
+  var reader = new FileReader();
+
+  reader.onload = function (event) {
+    console.log('onload');
+    var img = new Image();
+    // Render on canvas
+    img.onload = onImageReady.bind(null, img);
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(ev.target.files[0]);
+}
+
+function renderImg(img) {
+  gImportImg.isImport = true;
+  gImportImg.src = img.src;
+  hideGallery();
+  renderMeme();
+  gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
 function toggleMenu() {
