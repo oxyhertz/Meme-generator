@@ -15,8 +15,8 @@
 @import 'componenets/search-nav-bar.css';
 @import 'componenets/nav-bar.css';
 @import 'componenets/main-content.css';
-@import 'components/editor.css';
 @import 'componenets/about-me.css';
 @import 'componenets/footer.css';
 @import 'setup/mq.css';
 @import 'componenets/screen.css';
+@import 'componenets/editor.css';

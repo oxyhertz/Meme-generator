@@ -39,7 +39,7 @@ function addListeners() {
 
 function alignInitLines() {
   let meme = getMeme();
-  var heightPos = 60;
+  let heightPos = 60;
   meme.lines.forEach(line => {
     line.posX = gElCanvas.width / 2;
     line.posY = heightPos;
@@ -140,7 +140,6 @@ function renderSavedMemes() {
 
 function onUserMeme(idx) {
   var savedMemes = getSavedMemes();
-  var meme = getMeme();
   gMeme = savedMemes[idx];
   gUserImg = savedMemes[idx].url;
 
@@ -347,8 +346,8 @@ function onDown(ev) {
   gIsUpdateText = false;
   renderMeme();
 
-  var clickedLineIdx = clickedLineIndex(pos, meme);
-  var clickedStickerIdx = clickedStickerIndex(pos, meme);
+  let clickedLineIdx = clickedLineIndex(pos, meme);
+  let clickedStickerIdx = clickedStickerIndex(pos, meme);
 
   meme.selectedLineIdx = -1;
 
