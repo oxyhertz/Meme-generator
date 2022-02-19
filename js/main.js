@@ -8,7 +8,9 @@ var gUserImg;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
-  createImgs();
+  // createImgs();
+  renderPrimaryKeywords();
+  renderMoreKeywords();
   renderGallery(getImgs());
   createCanvas();
   resizeCanvas();
@@ -74,7 +76,6 @@ function updateText() {
 
 function renderMeme() {
   var meme = getMeme();
-  console.log(meme.selectedLineIdx);
   drawImg(meme);
   drawLines(meme);
   drawStickers(meme);
@@ -135,9 +136,11 @@ function renderSavedMemes() {
 function onUserMeme(idx) {
   // setImg(id);
   var savedMemes = getSavedMemes();
+  var meme = getMeme();
   gMeme = savedMemes[idx];
   gUserImg = savedMemes[idx].url;
-  // renderMeme();
+
+  renderMeme();
   drawLines(gMeme);
   drawStickers(gMeme);
   document.querySelector('.main-nav-container').classList.add('hidden');
@@ -226,14 +229,23 @@ function onChangeAligment(location) {
 }
 function onChangeFontSize(operator) {
   changeFontSize(operator);
-  // if (stickerClicked) changeStickerSize();
   renderMeme();
   focused();
+}
+
+function onKeyword(el) {
+  let currKey = el.innerText.toLowerCase();
+  updateKeywordSize(currKey);
+  let currKeySize = getKeySize(currKey);
+  if (currKeySize > 3) return;
+  el.style.fontSize = currKeySize + 'em';
+  onSetFilter(currKey);
 }
 
 function drawImg(meme) {
   var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
   if (gUserImg) {
+    console.log('hiihii');
     elImg = new Image();
     elImg.src = `images/meme-imgs/${meme.selectedImgId}.jpg`;
   }
@@ -256,27 +268,32 @@ function drawText(line) {
 function focused() {
   let meme = getMeme();
 
-  if (meme.selectedLineIdx === -1) return;
-
-  // if (meme.gIsClickOnSticker) {
-  //   let currSticker = meme.stickers[meme.selectedStickerIdx];
-  //   let width = line.width + 20;
-  //   let height = line.size + 10;
-  //   let startY = line.posY - line.size;
-  //   let startX = line.posX - line.width / 2 - 10;
-  // }
-  let line = meme.lines[meme.selectedLineIdx];
-  let width = line.width + 20;
-  let height = line.size + 10;
-  let startY = line.posY - line.size;
-  let startX = line.posX - line.width / 2 - 10;
-  switch (line.align) {
-    case 'right':
-      startX -= line.width / 2;
-      break;
-    case 'left':
-      startX += line.width / 2;
-      break;
+  let line;
+  let width;
+  let height;
+  let startX;
+  let startY;
+  if (meme.gIsClickOnSticker) {
+    let currSticker = meme.stickers[meme.selectedStickerIdx];
+    width = currSticker.size + 20;
+    height = currSticker.size + 20;
+    startY = currSticker.posY - 10;
+    startX = currSticker.posX - 10;
+  } else {
+    if (meme.selectedLineIdx === -1) return;
+    line = meme.lines[meme.selectedLineIdx];
+    width = line.width + 20;
+    height = line.size + 10;
+    startY = line.posY - line.size;
+    startX = line.posX - line.width / 2 - 10;
+    switch (line.align) {
+      case 'right':
+        startX -= line.width / 2;
+        break;
+      case 'left':
+        startX += line.width / 2;
+        break;
+    }
   }
   gCtx.beginPath();
   gCtx.rect(startX, startY, width, height);
@@ -336,15 +353,16 @@ function onDown(ev) {
     meme.selectedLineIdx = clickedLineIdx;
     gIsUpdateText = true;
     updateInputVal(getCurrLine().txt);
+    meme.gIsClickOnSticker = false;
     focused();
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
-    meme.gIsClickOnSticker = false;
   } else if (clickedStickerIdx >= 0) {
     meme.gIsClickOnSticker = true;
     meme.selectedStickerIdx = clickedStickerIdx;
     setStickerDrag(true);
+    focused();
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
   }
@@ -374,6 +392,7 @@ function onMove(ev) {
     moveCurrSticker(dx, dy);
     gStartPos = pos;
     renderMeme();
+    focused();
   }
 }
 
@@ -383,6 +402,38 @@ function onUp(ev) {
   if (sticker === undefined) return;
   setStickerDrag(false);
   document.body.style.cursor = 'grab';
+}
+
+function renderPrimaryKeywords() {
+  var keywords = getKeywordsMap();
+  var strHTML = '';
+  var sentinel = 0;
+  for (const key in keywords) {
+    if (sentinel > 3) break;
+    strHTML += `<span style="font-size:${keywords[key]}rem;" class='keyword' onclick='onKeyword(this)'>${key}</span>`;
+    sentinel++;
+  }
+  strHTML += ` <span class="more-keys" onclick="onMoreKeywords(this)">more...</span>`;
+  document.querySelector('.keywords-container').innerHTML = strHTML;
+}
+
+function onMoreKeywords(el) {
+  el.innerText = el.innerText === 'more...' ? 'less...' : 'more...';
+  document
+    .querySelector('.more-keywords-container')
+    .classList.toggle('hidden-opacity');
+}
+
+function renderMoreKeywords() {
+  var keywords = getKeywordsMap();
+  var strHTML = '';
+  var sentinel = 4;
+  for (const key in keywords) {
+    sentinel--;
+    if (sentinel >= 0) continue;
+    strHTML += `<span style="font-size:${keywords[key]}rem;" class='keyword' onclick='onKeyword(this)'>${key}</span>`;
+  }
+  document.querySelector('.more-keywords-container').innerHTML = strHTML;
 }
 
 function getEvPos(ev) {

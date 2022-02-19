@@ -18,8 +18,11 @@
   }
   .gallery {
     display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 283.3px));
     flex-wrap: wrap;
+  }
+
+  .gallery img {
+    height: auto;
   }
 
   .gallery > * {
