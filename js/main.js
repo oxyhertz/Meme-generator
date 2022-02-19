@@ -39,7 +39,7 @@ function addListeners() {
 
 function alignInitLines() {
   let meme = getMeme();
-  var heightPos = 40;
+  var heightPos = 60;
   meme.lines.forEach(line => {
     line.posX = gElCanvas.width / 2;
     line.posY = heightPos;

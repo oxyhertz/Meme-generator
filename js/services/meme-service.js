@@ -331,10 +331,11 @@ function updateKeywordSize(keyword) {
 function getKeySize(keyword) {
   return gKeywordsMap[keyword];
 }
+
 function mapKeywords() {
   return gImgs.reduce((objMap, img) => {
     img.keywords.forEach(keyword => {
-      objMap[keyword] = 1;
+      objMap[keyword] = 0.8;
     });
     return objMap;
   }, {});

@@ -82,8 +82,8 @@
   }
 
   .gallery {
-    margin-left: 5px;
     gap: 5px;
+    padding: 15px;
   }
   .social-nav {
     justify-content: center;
