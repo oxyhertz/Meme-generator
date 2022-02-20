@@ -30,6 +30,32 @@
   cursor: pointer;
 }
 
+.btn-reversed {
+  background-color: var(--clr2);
+  border-radius: 11px;
+  text-align: center;
+  padding: 1.218rem 1.93rem 1rem 1.675rem;
+  font-size: 1.25rem;
+  color: var(--clr1);
+  border: none;
+}
+
+.flexiable.btn {
+  font-size: 0.8rem;
+  padding: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.flexiable.btn:hover {
+  /* border: 1px solid var(--clr1); */
+  box-shadow: inset 0px 0px 0px 2px var(--clr1);
+  background-color: white;
+  color: #000;
+}
+
 .btn-share a {
   color: var(--clr2);
 }

@@ -23,20 +23,40 @@
             <a class="nav-logo" href=""
               ><img src="/LOGO/LOGO.png" alt="" width="150px"
             /></a>
+            <!-- <li>
+              <select
+                class="form-select form-select-lg mb-3"
+                onchange="onSetLang(this.value)"
+              >
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+              </select>
+            </li> -->
             <li>
-              <label for="user-img-input"><a>Import</a></label>
-              <input
-                hidden
-                type="file"
-                class="user-img-input"
-                name="user-img-input"
-                id="user-img-input"
-                onchange="onImgInput(event)"
-              />
+              <a
+                href="#"
+                onclick="renderSavedMemes(),markActivePage(this)"
+                data-trans="memes"
+                >Memes</a
+              >
             </li>
-            <li><a href="#" onclick="renderSavedMemes()">Memes</a></li>
-            <li class=""><a href="index.html">Gallery</a></li>
-            <li><a href="#about">About</a></li>
+            <li class="">
+              <a
+                href="index.html"
+                onclick="markActivePage(this)"
+                class="active"
+                data-trans="gallery"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                href="#about"
+                onclick="markActivePage(this),onAbout()"
+                data-trans="about"
+                >About</a
+              >
+            </li>
           </ul>
           <div class="btn-menu" onclick="toggleMenu()">☰</div>
         </nav>
@@ -48,6 +68,7 @@
           <div class="search-container flex space-between align-center">
             <input
               class="input-search"
+              data-trans="input-search"
               type="text"
               placeholder="Enter search keyword"
               name="search"
@@ -71,6 +92,29 @@
             <div class="keywords-container"></div>
             <div class="more-keywords-container hidden-opacity"></div>
           </div>
+          <div class="action-btns-container">
+            <div>
+              <label for="user-img-input"
+                ><a class="btn flexiable" data-trans="import">Import</a></label
+              >
+              <input
+                hidden
+                type="file"
+                class="user-img-input"
+                name="user-img-input"
+                id="user-img-input"
+                onchange="onImgInput(event)"
+              />
+            </div>
+
+            <button
+              class="flexiable btn"
+              data-trans="flexiable"
+              onclick="onFlex();"
+            >
+              flexiable
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -87,6 +131,7 @@
                 class="input-txt"
                 type="text"
                 placeholder="Enter text"
+                data-trans="input-txt"
                 name="txt"
               />
               <div class="canvas-operators-row">
@@ -218,9 +263,14 @@
                 class="btn"
                 onclick="downloadImg(this)"
                 download="my-img.jpg"
+                data-trans="download-img"
                 >Download as jpeg</a
               >
-              <button class="btn btn-share" onclick="uploadImg()">
+              <button
+                data-trans="share"
+                class="btn btn-share"
+                onclick="uploadImg()"
+              >
                 Share<span class="share-canvas"></span>
               </button>
 
@@ -269,10 +319,13 @@
     <footer class="main-footer" id="footer">
       <div class="footer-container flex main-layout align-center">
         <a href=""><img src="./logo/LOGO.png" alt="" width="150px" /></a>
-        <p>all rights reserved 2022</p>
+        <p data-trans="rights">all rights reserved 2022</p>
       </div>
     </footer>
+    <div class="user-msg"></div>
+    <script src="js/util.js"></script>
     <script src="js/services/storage-service.js"></script>
+    <script src="js/services/i18n-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/services/upload-service.js"></script>

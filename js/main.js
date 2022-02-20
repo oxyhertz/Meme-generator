@@ -26,6 +26,7 @@ function init() {
 function addListeners() {
   addMouseListeners();
   addTouchListeners();
+
   window.addEventListener('resize', () => {
     resizeCanvas();
     alignInitLines();
@@ -39,6 +40,7 @@ function addListeners() {
 function alignInitLines() {
   let meme = getMeme();
   let heightPos = 60;
+
   meme.lines.forEach(line => {
     line.posX = gElCanvas.width / 2;
     line.posY = heightPos;
@@ -71,6 +73,7 @@ function resizeCanvas() {
 
 function updateText() {
   let elTxtVal = document.querySelector('.input-txt').value;
+
   if (!gIsUpdateText) return;
   updateLineTxt(elTxtVal);
   renderMeme();
@@ -79,6 +82,7 @@ function updateText() {
 
 function renderMeme() {
   var meme = getMeme();
+
   drawImg(meme);
   drawLines(meme);
   drawStickers(meme);
@@ -123,12 +127,18 @@ function renderSticker() {
 function renderSavedMemes() {
   document.querySelector('.gallery').classList.remove('hidden');
   document.querySelector('.editor').classList.add('hidden-opacity');
+
   gImportImg.isImport = false;
   let memes = getSavedMemes();
+
   var strHTML = memes
     .map((meme, idx) => {
       return `
-    <img class="user-meme user-meme-${idx}" src="${meme.url}" alt="" onclick="onUserMeme(${idx})">
+      <div class='item item-${idx + 1}'>
+    <img class="user-meme user-meme-${idx}" src="${
+        meme.url
+      }" alt="" onclick="onUserMeme(${idx})">
+      </div>
     `;
     })
     .join('');
@@ -152,8 +162,10 @@ function onUserMeme(idx) {
 function onAddText() {
   const txt = document.querySelector('.input-txt').value.trim();
   if (!txt) return;
+
   let posY = gElCanvas.height / 2;
   let posX = gElCanvas.width / 2;
+
   setLineTxt(txt, posY, posX);
   renderMeme();
   document.querySelector('.input-txt').value = '';
@@ -168,6 +180,11 @@ function onAddSticker(id) {
 
 function drawSticker(sticker) {
   var elImg = document.querySelector(`.sticker-${sticker.id}`);
+  elImg = new Image();
+  elImg.src = `stickers/${sticker.id}.png`;
+  console.log(sticker.id);
+  console.log(elImg);
+
   gCtx.drawImage(elImg, sticker.posX, sticker.posY, sticker.size, sticker.size);
 }
 
@@ -186,6 +203,7 @@ function drawLines(meme) {
 function onSaveMeme() {
   var imgUrl = gElCanvas.toDataURL('img/jpg');
   saveMeme(imgUrl);
+  flashMsg('Meme has been saved!');
 }
 
 function onFillcolor() {
@@ -235,18 +253,21 @@ function onChangeFontSize(operator) {
 function onKeyword(el) {
   let currKey = el.innerText.toLowerCase();
   updateKeywordSize(currKey);
+  console.log(currKey);
+  updateSearchInputVal(currKey);
   let currKeySize = getKeySize(currKey);
   if (currKeySize > 3) return;
   el.style.fontSize = currKeySize + 'em';
   onSetFilter(currKey);
 }
 
+function updateSearchInputVal(keyword) {
+  document.querySelector('.input-search').value = keyword;
+}
+
 function drawImg(meme) {
-  var elImg = document.querySelector(`.img-${meme.selectedImgId}`);
-  if (gUserImg) {
-    elImg = new Image();
-    elImg.src = `images/meme-imgs/${meme.selectedImgId}.jpg`;
-  }
+  var elImg = new Image();
+  elImg.src = `images/meme-imgs/${meme.selectedImgId}.jpg`;
 
   if (gImportImg.isImport) {
     elImg = new Image();
@@ -471,6 +492,7 @@ function loadImageFromInput(ev, onImageReady) {
     img.src = event.target.result;
   };
   reader.readAsDataURL(ev.target.files[0]);
+  renderMeme();
 }
 
 function renderImg(img) {
@@ -481,6 +503,23 @@ function renderImg(img) {
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
+function onFlex() {
+  hideGallery();
+  var meme = getMeme();
+  var maxWidth = document.querySelector('#canvas').width;
+  meme.lines.forEach(line => {
+    let randIdx = getRandomInt(0, memesSentences.length - 1);
+    line.txt = memesSentences[randIdx];
+    line.fillColor = getRandomColor();
+    line.strokeColor = getRandomColor();
+    line.width = gCtx.measureText(line.txt).width;
+    line.size = line.width > maxWidth / 2 - 10 ? 20 : 40;
+  });
+  meme.selectedImgId = getRandomInt(1, getImgs().length);
+
+  renderMeme();
+}
+
 function toggleMenu() {
   document.body.classList.toggle('menu-open');
 }
@@ -488,4 +527,34 @@ function toggleMenu() {
 function downloadImg(elLink) {
   var imgContent = gElCanvas.toDataURL('image/jpeg');
   elLink.href = imgContent;
+}
+
+function onSetLang(lang) {
+  setLang(lang);
+  if (lang === 'he') document.body.classList.add('rtl');
+  else document.body.classList.remove('rtl');
+  // render();
+  doTrans();
+  // markCurrPage(getCurrPage());
+}
+
+function markActivePage(el) {
+  var actives = document.querySelectorAll('.active');
+  actives.forEach(el => {
+    el.classList.remove('active');
+  });
+  el.classList.add('active');
+}
+
+function onAbout() {
+  document.querySelector('article').classList.remove('hidden');
+}
+
+function flashMsg(msg) {
+  const el = document.querySelector('.user-msg');
+  el.innerText = msg;
+  el.classList.add('open');
+  setTimeout(() => {
+    el.classList.remove('open');
+  }, 3000);
 }

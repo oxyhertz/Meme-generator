@@ -50,3 +50,10 @@
 .keyword {
   font-size: 1rem;
 }
+
+.action-btns-container {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  margin-inline-start: 0.5em;
+}

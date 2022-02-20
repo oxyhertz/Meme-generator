@@ -81,14 +81,29 @@
     text-align: center;
   }
 
+  .main-header {
+    padding: 15px;
+  }
+
   .gallery {
     gap: 5px;
-    padding: 15px;
+    padding-inline-start: 15px;
   }
   .social-nav {
     justify-content: center;
   }
   .profile-img {
     margin-right: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  #canvas {
+    width: 350px;
+    height: 350px;
+  }
+  .canvas-container {
+    height: 350px;
+    width: 350px;
   }
 }

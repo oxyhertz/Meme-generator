@@ -108,3 +108,16 @@ main {
 .share-bar {
   margin-top: 1.25em;
 }
+
+.keywords-container > * {
+  cursor: pointer;
+}
+
+.share-bar {
+  display: flex;
+  gap: 0.5em;
+}
+
+.share-bar > a {
+  flex-grow: 1;
+}

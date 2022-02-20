@@ -1,5 +1,5 @@
 'use strict';
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 2;
 const STORAGE_KEY = 'savedMemesDB';
 
 var gSavedMemes;
@@ -48,6 +48,9 @@ function getMeme() {
   return gMeme;
 }
 
+function getImgs() {
+  return gImgs;
+}
 function setLineTxt(txt, posY, posX) {
   gMeme.lines.push({
     txt,
@@ -205,6 +208,11 @@ function getImgs() {
 
 function setImg(id) {
   gMeme.selectedImgId = id;
+}
+
+function setProp(prop, val) {
+  if (isLineNotSelected()) return;
+  gMeme.lines[gMeme.selectedLineIdx][prop] = val;
 }
 
 function fillColor(color) {
