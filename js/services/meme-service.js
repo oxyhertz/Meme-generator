@@ -112,92 +112,92 @@ function createImgs() {
   gImgs = [];
   gImgs.push({
     id: 1,
-    url: './images/meme-imgs/1.jpg',
+    url: 'images/meme-imgs/1.jpg',
     keywords: ['trump', 'politics'],
   });
   gImgs.push({
     id: 2,
-    url: './images/meme-imgs/2.jpg',
+    url: 'images/meme-imgs/2.jpg',
     keywords: ['animal', 'cute', 'dog'],
   });
   gImgs.push({
     id: 3,
-    url: './images/meme-imgs/3.jpg',
+    url: 'images/meme-imgs/3.jpg',
     keywords: ['animal', 'cute', 'dog'],
   });
   gImgs.push({
     id: 4,
-    url: './images/meme-imgs/4.jpg',
+    url: 'images/meme-imgs/4.jpg',
     keywords: ['funny', 'cats', 'animals'],
   });
   gImgs.push({
     id: 5,
-    url: './images/meme-imgs/5.jpg',
+    url: 'images/meme-imgs/5.jpg',
     keywords: ['baby', 'funny'],
   });
   gImgs.push({
     id: 6,
-    url: './images/meme-imgs/6.jpg',
+    url: 'images/meme-imgs/6.jpg',
     keywords: ['politics', 'funny'],
   });
   gImgs.push({
     id: 7,
-    url: './images/meme-imgs/7.jpg',
+    url: 'images/meme-imgs/7.jpg',
     keywords: ['baby', 'explain'],
   });
   gImgs.push({
     id: 8,
-    url: './images/meme-imgs/8.jpg',
+    url: 'images/meme-imgs/8.jpg',
     keywords: ['explain', 'cat'],
   });
   gImgs.push({
     id: 9,
-    url: './images/meme-imgs/9.jpg',
+    url: 'images/meme-imgs/9.jpg',
     keywords: ['baby', 'funny'],
   });
   gImgs.push({
     id: 10,
-    url: './images/meme-imgs/10.jpg',
+    url: 'images/meme-imgs/10.jpg',
     keywords: ['politics', 'funny'],
   });
   gImgs.push({
     id: 11,
-    url: './images/meme-imgs/11.jpg',
+    url: 'images/meme-imgs/11.jpg',
     keywords: ['explain', 'sport'],
   });
   gImgs.push({
     id: 12,
-    url: './images/meme-imgs/12.jpg',
+    url: 'images/meme-imgs/12.jpg',
     keywords: ['dontsay', 'explain'],
   });
   gImgs.push({
     id: 13,
-    url: './images/meme-imgs/13.jpg',
+    url: 'images/meme-imgs/13.jpg',
     keywords: ['dontsay', 'explain'],
   });
   gImgs.push({
     id: 14,
-    url: './images/meme-imgs/14.jpg',
+    url: 'images/meme-imgs/14.jpg',
     keywords: ['matrix', 'seriously'],
   });
   gImgs.push({
     id: 15,
-    url: './images/meme-imgs/15.jpg',
+    url: 'images/meme-imgs/15.jpg',
     keywords: ['dontsay', 'explain'],
   });
   gImgs.push({
     id: 16,
-    url: './images/meme-imgs/16.jpg',
+    url: 'images/meme-imgs/16.jpg',
     keywords: ['politics', 'person'],
   });
   gImgs.push({
     id: 17,
-    url: './images/meme-imgs/17.jpg',
+    url: 'images/meme-imgs/17.jpg',
     keywords: ['politics', 'person'],
   });
   gImgs.push({
     id: 18,
-    url: './images/meme-imgs/18.jpg',
+    url: 'images/meme-imgs/18.jpg',
     keywords: ['toy', 'show'],
   });
 }
